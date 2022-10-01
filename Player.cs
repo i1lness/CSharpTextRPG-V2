@@ -7,44 +7,29 @@ using System.Threading.Tasks;
 
 namespace CSharpTextRPG_V2
 {
-    enum PlayerType
+    public enum PlayerType
     {
         None = 0,
         Knight = 1,
         Archer = 2,
         Mage = 3
     }
-    
-    class Player
+
+    internal class Player : Creature
     {
         protected PlayerType type = PlayerType.None;
-        protected int hp = 0;
-        protected int power = 0;
 
-        protected Player(PlayerType type)
+        public Player() : base(CreatureType.Player)
+        {
+
+        }
+
+        protected Player(PlayerType type) : base(CreatureType.Player)
         {
             this.type = type;
         }
 
-        public void SetInfo(int hp, int power)
-        {
-            this.hp = hp;
-            this.power = power;
-        }
-
         public PlayerType GetPlayerType() { return type; }
-        public int GetHp() { return hp; }   
-        public int GetPower() { return power; }
-
-        public bool IsDead() { return hp <= 0; }
-
-        public void OnDamaged(int damage)
-        {
-            hp -= damage;
-            if (hp < 0) hp = 0;
-        }
-
-        
     }
 
     class Knight : Player
